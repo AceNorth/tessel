@@ -1,0 +1,16 @@
+{
+  "name": "gressel",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "rfid-pn532": "^0.1.9",
+    "servo-pca9685": "^0.1.3",
+    "tessel": "^0.3.25"
+  }
+}
