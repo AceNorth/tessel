@@ -6,8 +6,8 @@ var rfid = rfidlib.use(tessel.port['A']);
 var servo = servoLib.use(tessel.port['B']);
 
 var blinky;
-var min = 1, max = 5;
-var slapNumber = randInRange(min, max, true);
+var originMax = 10;
+var min = 1, max = originMax;
 var port = 1;
 
 function randInRange(min, max, inclusive) {
@@ -52,7 +52,6 @@ Promise.all([rfidRdy, servoRdy])
 	})
 	.then(function(arr) {
 		var card = arr[0];
-		console.log(slapNumber);
 		tessel.led[2].on();
 
 		rfid.on('read', function(card) {
@@ -67,9 +66,18 @@ Promise.all([rfidRdy, servoRdy])
 					clearInterval(blinky);
 					blinky = undefined;
 					var rand = randInRange(min, max, true);
+					var slapNumber = randInRange(min, max, true);
 					console.log("RANDO NUM: ",rand);
+					console.log("SLAP NUM: ",slapNumber);
 					if (rand === slapNumber) {
+						console.log('You got slapped!');
 						slapThem();
+						max = originMax;
+					}
+					else {
+						max--;
+						console.log('You\'re safe... for now');
+						console.log('The new slapMaxx is ' + max);
 					}
 				}, 2000);
 			}
